@@ -8,13 +8,10 @@ section {
 }
 
 .board {
-    display:flex;
-    flex-direction: column;
-    flex-wrap:wrap;
-    width: 300px;
-    height: 300px;
-    margin: 50px auto;
-    /* having problem making 3x3 table. will add it later */
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 18rem;
+    margin: auto auto;
 }
 
 .cell {
