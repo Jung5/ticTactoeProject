@@ -46,9 +46,7 @@ const toWin = () => {
 
 // to draw:
 if(!cell.includes('')){
-  statusDisplay.innerHTML = drawMessage();
-  gameActive = false;
-  return;
+  
 }
 
 
