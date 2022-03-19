@@ -1,3 +1,10 @@
+// setting variables.
+const boxes = document.querySelectorAll('.cell');
+const cell = [];
+let currentPlayer = "X";
+let opponent = "O";
+
+
 
 // board memo
 //  [0,1,2]
@@ -5,7 +12,6 @@
 //  [6,7,8]
 
 // 8 different patterns to win
-// const toWin = [
 //     [0, 1, 2],
 //     [3, 4, 5],
 //     [6, 7, 8],
@@ -14,6 +20,36 @@
 //     [2, 5, 8],
 //     [0, 4, 8],
 //     [2, 4, 6]
+
+
+// to win:
+
+const toWin = () => {
+     if (cell[0] === currentPlayer && cell[1] === currentPlayer && cell[2] === currentPlayer) {
+      return true;
+    }if (cell[3] === currentPlayer && cell[4] === currentPlayer && cell[5] === currentPlayer) {
+      return true;
+    }if (cell[6] === currentPlayer && cell[7] === currentPlayer && cell[8] === currentPlayer) {
+      return true;
+    }if (cell[0] === currentPlayer && cell[3] === currentPlayer && cell[6] === currentPlayer) {
+      return true;
+    }if (cell[1] === currentPlayer && cell[4] === currentPlayer && cell[7] === currentPlayer) {
+      return true;
+    }if (cell[2] === currentPlayer && cell[5] === currentPlayer && cell[8] === currentPlayer) {
+      return true;
+    }if (cell[0] === currentPlayer && cell[4] === currentPlayer && cell[8] === currentPlayer) {
+      return true;
+    }if (cell[2] === currentPlayer && cell[4] === currentPlayer && cell[6] === currentPlayer) {
+      return true;
+    }
+};
+
+// to draw:
+if(!cell.includes('')){
+  statusDisplay.innerHTML = drawMessage();
+  gameActive = false;
+  return;
+}
 
 
 // Things to do
