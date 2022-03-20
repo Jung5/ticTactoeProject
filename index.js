@@ -4,12 +4,13 @@ const announce = document.querySelector('.status');
 const gameStatus = document.querySelector('#gameStatus');
 const restartButton = document.querySelector('.restart');
 const cell = [];
-const currentPlayerTurn = () => `${currentPlayer}'s turn`;
+const winMSG = () => `${currentPlayer} has won`;
+const currentTurn = () => `${currentPlayer}'s turn`;
 
 let activeGame = true;
 let gameState = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
-let computer = "O";
+// let computer = "O";
 
 
 
@@ -28,6 +29,16 @@ let computer = "O";
 //     [0, 4, 8],
 //     [2, 4, 6]
 
+
+function tickedCell(tickedCell, tickedCellIndex) {
+  gameState[tickedCellIndex] = currentPlayer;
+  tickedCell.innerHTML = currentPlayer;
+}
+
+function playerTurn() {
+  currentPlayer = currentPlayer === "X" ? "Computer" : "X";
+  announce.innerHTML = currentTurn();
+}
 
 // to win:
 
@@ -49,6 +60,13 @@ const toWin = () => {
     }if (cell[2] === currentPlayer && cell[4] === currentPlayer && cell[6] === currentPlayer) {
       return true;
     }
+    
+    if (toWin) {
+      gameStatus.innerText = `${currentPlayer} has won`;
+      activeGame = false;
+      return;
+    }
+    
 };
 
 // to draw:
@@ -60,19 +78,40 @@ const toDraw = () => {
   if (draw === 9) {
     gameStatus.innerText = `Draw`;
     restart();
+    announce.innerHTML = drawMsg();
+    activeGame = false;
   }
 };
 
+
+
 // to Restart:
 function restartGame() {
-  Activegame = true;
+  activeGame = true;
   currentPlayer = "X";
   gameState = ["", "", "", "", "", "", "", "", ""];
-  announce.innerHTML = currentPlayerTurn();
+  announce.innerHTML = currentTurn();
   document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 }
 
 
+function tickedCells(clickedCellEvent) {
+  const clickedCell = clickedCellEvent.target;
+  const clickedCellIndex = parseInt(clickedCell.getAttribute('cell'));
+
+  if (gameState[clickedCellIndex] !== "" || !gameActive) {
+      return;
+  }
+
+  handleCellPlayed(clickedCell, clickedCellIndex);
+  handleResultValidation();
+}
+
+
+
+
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+document.querySelector('restart').addEventListener('click', restartGame);
 
 // Things to do
 //   game must be turned on and off
