@@ -1,8 +1,15 @@
 // setting variables.
-const boxes = document.querySelectorAll('.cell');
+const cells = document.querySelectorAll('.cell');
+const announce = document.querySelector('.status');
+const gameStatus = document.querySelector('#gameStatus');
+const restartButton = document.querySelector('.restart');
 const cell = [];
+const currentPlayerTurn = () => `${currentPlayer}'s turn`;
+
+let activeGame = true;
+let gameState = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
-let opponent = "O";
+let computer = "O";
 
 
 
@@ -45,9 +52,26 @@ const toWin = () => {
 };
 
 // to draw:
-if(!cell.includes('')){
-  
+const toDraw = () => {
+  let draw = 0;
+  cell.forEach((cell, i) => {
+    if (cell[i] !== null) draw++;
+  });
+  if (draw === 9) {
+    gameStatus.innerText = `Draw`;
+    restart();
+  }
+};
+
+// to Restart:
+function restartGame() {
+  Activegame = true;
+  currentPlayer = "X";
+  gameState = ["", "", "", "", "", "", "", "", ""];
+  announce.innerHTML = currentPlayerTurn();
+  document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 }
+
 
 
 // Things to do
