@@ -1,11 +1,14 @@
 // setting variables.
 const cells = document.querySelectorAll('.cell');
 const announce = document.querySelector('.status');
-const gameStatus = document.querySelector('#gameStatus');
 const restartButton = document.querySelector('.restart');
 const cell = [];
-const winMSG = () => `${currentPlayer} has won`;
-const currentTurn = () => `${currentPlayer}'s turn`;
+
+const winMsg = () => `${currentPlayer} has won`;
+const drawMsg = () => `Draw`;
+const currentTurnMsg = () => `${currentPlayer}'s turn`;
+
+announce.innerHTML = currentTurnMsg();
 
 let activeGame = true;
 let gameState = ["", "", "", "", "", "", "", "", ""];
@@ -30,88 +33,86 @@ let currentPlayer = "X";
 //     [2, 4, 6]
 
 
-function tickedCell(tickedCell, tickedCellIndex) {
+function tickCells(tickedCell, tickedCellIndex) {
   gameState[tickedCellIndex] = currentPlayer;
   tickedCell.innerHTML = currentPlayer;
 }
 
 function playerTurn() {
   currentPlayer = currentPlayer === "X" ? "Computer" : "X";
-  announce.innerHTML = currentTurn();
+  announce.innerHTML = currentTurnMsg();
 }
 
 // to win:
-
+function resultValidation() {
+ let winning = false;
 const toWin = () => {
      if (cell[0] === currentPlayer && cell[1] === currentPlayer && cell[2] === currentPlayer) {
-      return true;
+      return winning = true;
     }if (cell[3] === currentPlayer && cell[4] === currentPlayer && cell[5] === currentPlayer) {
-      return true;
+      return winning =  true;
     }if (cell[6] === currentPlayer && cell[7] === currentPlayer && cell[8] === currentPlayer) {
-      return true;
+      return winning = true;
     }if (cell[0] === currentPlayer && cell[3] === currentPlayer && cell[6] === currentPlayer) {
-      return true;
+      return winning = true;
     }if (cell[1] === currentPlayer && cell[4] === currentPlayer && cell[7] === currentPlayer) {
-      return true;
+      return winning = true;
     }if (cell[2] === currentPlayer && cell[5] === currentPlayer && cell[8] === currentPlayer) {
-      return true;
+      return winning = true;
     }if (cell[0] === currentPlayer && cell[4] === currentPlayer && cell[8] === currentPlayer) {
-      return true;
+      return winning = true;
     }if (cell[2] === currentPlayer && cell[4] === currentPlayer && cell[6] === currentPlayer) {
-      return true;
+      return winning = true;
     }
     
-    if (toWin) {
-      gameStatus.innerText = `${currentPlayer} has won`;
+    if (winning) {
+      announce.innerText = winMsg();
       activeGame = false;
       return;
     }
     
+    // to draw:
+    const toDraw = () => {
+      let draw = 0;
+      cell.forEach((cell, i) => {
+        if (cell[i] !== null) draw++;
+      });
+      if (draw === 9) {
+        announce.innerText = `Draw`;
+        restart();
+        announce.innerHTML = drawMsg();
+        activeGame = false;
+      }
+    }
+    }
+    playerTurn();
 };
 
-// to draw:
-const toDraw = () => {
-  let draw = 0;
-  cell.forEach((cell, i) => {
-    if (cell[i] !== null) draw++;
-  });
-  if (draw === 9) {
-    gameStatus.innerText = `Draw`;
-    restart();
-    announce.innerHTML = drawMsg();
-    activeGame = false;
+
+function tickedCells(tickedCellEvent) {
+  const tickedCell = tickedCellEvent.target;
+  const tickedCellIndex = parseInt(tickedCell.getAttribute('data-cell-index'));
+
+  if (gameState[tickedCellIndex] !== "" || !activeGame) {
+      return;
   }
-};
 
-
+  tickCells(tickedCell, tickedCellIndex);
+  resultValidation();
+}
 
 // to Restart:
 function restartGame() {
   activeGame = true;
   currentPlayer = "X";
   gameState = ["", "", "", "", "", "", "", "", ""];
-  announce.innerHTML = currentTurn();
+  announce.innerHTML = currentTurnMsg();
   document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 }
 
 
-function tickedCells(clickedCellEvent) {
-  const clickedCell = clickedCellEvent.target;
-  const clickedCellIndex = parseInt(clickedCell.getAttribute('cell'));
-
-  if (gameState[clickedCellIndex] !== "" || !gameActive) {
-      return;
-  }
-
-  handleCellPlayed(clickedCell, clickedCellIndex);
-  handleResultValidation();
-}
-
-
-
-
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
-document.querySelector('restart').addEventListener('click', restartGame);
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', tickedCells));
+document.querySelector('.restart').addEventListener('click', restartGame);
 
 // Things to do
 //   game must be turned on and off
@@ -125,4 +126,4 @@ document.querySelector('restart').addEventListener('click', restartGame);
 // https://dev.to/bornasepic/pure-and-simple-tic-tac-toe-with-javascript-4pgn
 // https://github.com/nemo0/tic-tac-toe/blob/master/script.js
 // https://github.com/javascriptacademy-stash/tic-tac-toe/blob/master/index.js
-// https://github.com/angle943/tic-tac-toe/blob/master/app.js
+// https://github.com/angle943/tic-tac-toe/blob/master/app.js}
