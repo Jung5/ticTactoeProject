@@ -1,7 +1,7 @@
 // setting variables.
-const cells = document.querySelectorAll('.cell');
+// const cells = document.querySelectorAll('.cell');
 const announce = document.querySelector('.status');
-const restartButton = document.querySelector('.restart');
+// const restartButton = document.querySelector('.restart');
 const cell = [];
 
 const winMsg = () => `${currentPlayer} has won`;
@@ -72,21 +72,13 @@ const toWin = () => {
     }
     
     // to draw:
-    const toDraw = () => {
-      let draw = 0;
-      cell.forEach((cell, i) => {
-        if (cell[i] !== null) draw++;
-      });
-      if (draw === 9) {
-        announce.innerText = `Draw`;
-        restart();
-        announce.innerHTML = drawMsg();
-        activeGame = false;
-      }
+    let roundDraw = !gameState.includes("");
+    if (roundDraw) {
+        statusDisplay.innerHTML = drawMessage();
+        gameActive = false;
+        return;
     }
-    }
-    playerTurn();
-};
+
 
 
 function tickedCells(tickedCellEvent) {
