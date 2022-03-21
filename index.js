@@ -1,5 +1,5 @@
 // setting variables.
-// const cells = document.querySelectorAll('.cell');
+const cells = document.querySelectorAll('.cell');
 const announce = document.querySelector('.status');
 // const restartButton = document.querySelector('.restart');
 const cell = [];
@@ -22,16 +22,16 @@ let currentPlayer = "X";
 //  [3,4,5]
 //  [6,7,8]
 
-// 8 different patterns to win
-//     [0, 1, 2],
-//     [3, 4, 5],
-//     [6, 7, 8],
-//     [0, 3, 6],
-//     [1, 4, 7],
-//     [2, 5, 8],
-//     [0, 4, 8],
-//     [2, 4, 6]
-
+// const winPossibility = [
+//   [0, 1, 2],
+//   [3, 4, 5],
+//   [6, 7, 8],
+//   [0, 3, 6],
+//   [1, 4, 7],
+//   [2, 5, 8],
+//   [0, 4, 8],
+//   [2, 4, 6]
+// ];
 
 function tickCells(tickedCell, tickedCellIndex) {
   gameState[tickedCellIndex] = currentPlayer;
