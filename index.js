@@ -1,5 +1,6 @@
 const verify = [...document.querySelectorAll('.cell')];
-const clear = document.querySelector('.clean');
+const verify2 = document.getElementById('board')
+const clear = document.getElementById('clean');
 const announce = document.querySelector('.status');
 
 let boxnum = 0;
@@ -14,7 +15,11 @@ function clicekdCell (){
     }
     boxnum++
 };
-
+let backend = [
+    [null, null,null],
+    [null, null,null],
+    [null, null,null]
+]
 // board memo
 //  [0,1,2]
 //  [3,4,5]
@@ -48,17 +53,35 @@ function resultValidation(){
 };
 
 function resetGrid(){
+    
     for(let i = 0; i < verify.length; i++){
         verify[i].textContent='';
         boxnum = 0;
     }
 };
 
-for (let i = 0; 1 < verify.length; i++){
-    verify[i].addEventListener('click',clicekdCell); 
-    verify[i].addEventListener('click',resultValidation);
-}
-clear.addEventListener('click',resetGrid);
+// for (let i = 0; 1 < verify.length; i++){
+    
+//     verify[i].addEventListener('click',clicekdCell); 
+//     verify[i].addEventListener('click',resultValidation);
+// }
+
+let count = 1
+verify2.addEventListener('click',(e)=>{
+    
+    
+    if(count === 1 && e.target.innerHTML===''){
+        e.target.innerHTML='X'
+        count = 0
+    }else if(count === 0 && e.target.innerHTML===''){
+        e.target.innerHTML="O"
+        count = 1
+    }
+})
+
+clear.addEventListener('click',(e)=>{
+    verify.forEach(item=> item.innerHTML="")
+})
 
 // status display needs to be added
-// reset button is broken.
+// reset button is broken.-
