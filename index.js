@@ -4,15 +4,16 @@ const announce = document.querySelector('.status');
 
 let boxnum = 0;
 function clicekdCell (){
-    if (boxnum % 2 == 0 && this.textContent == '' && this.textContent != 'O') {
+    if (boxnum % 2 == 0 && this.textContent == '' && this.textContent !== 'O' && this.textContent !== 'X') {
         this.textContent = 'X';
         announce.innerHTML = 'Player X\'s turn'
+        boxnum++
     }
-    if (boxnum % 2 == 1 && this.textContent == '' && this.textContent != 'X') {
+    if (boxnum % 2 == 1 && this.textContent == '' && this.textContent !== 'X' && this.textContent !== 'O') {
         this.textContent = 'O';
         announce.innerHTML = 'Player O\'s turn'
+        boxnum++
     }
-    boxnum++
 };
 
 // board memo
@@ -60,3 +61,5 @@ for(let i = 0; i < verify.length; i++){
 };
 
 clear.addEventListener('click',resetGrid);
+
+// <form> needs to be added, but I'll come back to this after I graduate.
