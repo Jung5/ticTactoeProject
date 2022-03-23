@@ -4,13 +4,13 @@ const announce = document.querySelector('.status');
 
 let boxnum = 0;
 function clicekdCell (){
-    if (boxnum % 2 == 0 && this.textContent == '') {
+    if (boxnum % 2 == 0 && this.textContent == '' && this.textContent != 'O') {
         this.textContent = 'X';
-        announce.innerHTML = 'Player X turn'
+        announce.innerHTML = 'Player X\'s turn'
     }
-    if (boxnum % 2 == 1 && this.textContent == '') {
+    if (boxnum % 2 == 1 && this.textContent == '' && this.textContent != 'X') {
         this.textContent = 'O';
-        announce.innerHTML = 'Player O turn'
+        announce.innerHTML = 'Player O\'s turn'
     }
     boxnum++
 };
@@ -33,12 +33,12 @@ function clicekdCell (){
 
 function resultValidation(){
     if((verify[0].textContent == 'X' && verify[1].textContent == 'X' && verify[2].textContent == 'X') || (verify[3].textContent == 'X' && verify[4].textContent == 'X' && verify[5].textContent == 'X') || (verify[6].textContent == 'X' && verify[7].textContent == 'X' && verify[8].textContent == 'X') || (verify[0].textContent == 'X' && verify[3].textContent == 'X' && verify[6].textContent == 'X') || (verify[1].textContent == 'X' && verify[4].textContent == 'X' && verify[7].textContent == 'X') || (verify[2].textContent == 'X' && verify[5].textContent == 'X' && verify[8].textContent == 'X') || (verify[0].textContent == 'X' && verify[4].textContent == 'X' && verify[8].textContent == 'X') || (verify[2].textContent == 'X' && verify[4].textContent == 'X' && verify[6].textContent == 'X')){
-        announce.innerHTML = 'X wins';
+        announce.innerHTML = 'Player X wins';
         resetGrid();
     }
 
     else if((verify[0].textContent == 'O' && verify[1].textContent == 'O' && verify[2].textContent == 'O') || (verify[3].textContent == 'O' && verify[4].textContent == 'O' && verify[5].textContent == 'O') || (verify[6].textContent == 'O' && verify[7].textContent == 'O' && verify[8].textContent == 'O') || (verify[0].textContent == 'O' && verify[3].textContent == 'O' && verify[6].textContent == 'O') || (verify[1].textContent == 'O' && verify[4].textContent == 'O' && verify[7].textContent == 'O') || (verify[2].textContent == 'O' && verify[5].textContent == 'O' && verify[8].textContent == 'O') || (verify[0].textContent == 'O' && verify[4].textContent == 'O' && verify[8].textContent == 'O') || (verify[2].textContent == 'O' && verify[4].textContent == 'O' && verify[6].textContent == 'O')){
-        announce.innerHTML = 'O wins';
+        announce.innerHTML = 'Player O wins';
         resetGrid();
     }
     else if(boxnum==9){
@@ -54,10 +54,9 @@ function resetGrid(){
     }
 };
 
-for (let i = 0; 1 < verify.length; i++){
+for(let i = 0; i < verify.length; i++){
     verify[i].addEventListener('click',clicekdCell); 
     verify[i].addEventListener('click',resultValidation);
-}
-clear.addEventListener('click',resetGrid);
+};
 
-// reset button is broken.
+clear.addEventListener('click',resetGrid);
