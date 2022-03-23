@@ -6,11 +6,11 @@ let boxnum = 0;
 function clicekdCell (){
     if (boxnum % 2 == 0 && this.textContent == '') {
         this.textContent = 'X';
-        // statusDisplay.innerHTML = 'Player X turn'
+        announce.innerHTML = 'Player X turn'
     }
     if (boxnum % 2 == 1 && this.textContent == '') {
         this.textContent = 'O';
-        // statusDisplay.innerHTML = 'Player X turn'
+        announce.innerHTML = 'Player O turn'
     }
     boxnum++
 };
@@ -60,5 +60,4 @@ for (let i = 0; 1 < verify.length; i++){
 }
 clear.addEventListener('click',resetGrid);
 
-// status display needs to be added
 // reset button is broken.
