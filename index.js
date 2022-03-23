@@ -3,18 +3,38 @@ const verify2 = document.getElementById('board')
 const clear = document.getElementById('clean');
 const announce = document.querySelector('.status');
 
-let boxnum = 0;
-function clicekdCell (){
-    if (boxnum % 2 == 0 && this.textContent == '') {
-        this.textContent = 'X';
-        // statusDisplay.innerHTML = 'Player X turn'
+let count = 1
+verify2.addEventListener('click',(e)=>{
+    if(count === 1 && e.target.innerHTML===''){
+        e.target.innerHTML='X'
+        count = 0
+        announce.innerHTML = 'Player X turn'
+    }else if(count === 0 && e.target.innerHTML===''){
+        e.target.innerHTML="O"
+        count = 1
+        announce.innerHTML = 'Player O turn'
     }
-    if (boxnum % 2 == 1 && this.textContent == '') {
-        this.textContent = 'O';
-        // statusDisplay.innerHTML = 'Player X turn'
-    }
-    boxnum++
-};
+})
+
+clear.addEventListener('click',(e)=>{
+    verify.forEach(item=> item.innerHTML="")
+})
+
+
+
+// let boxnum = 0;
+// function clicekdCell (){
+//     if (boxnum % 2 == 0 && this.textContent == '') {
+//         this.textContent = 'X';
+//         // statusDisplay.innerHTML = 'Player X turn'
+//     }
+//     if (boxnum % 2 == 1 && this.textContent == '') {
+//         this.textContent = 'O';
+//         // statusDisplay.innerHTML = 'Player X turn'
+//     }
+//     boxnum++
+// };
+
 let backend = [
     [null, null,null],
     [null, null,null],
@@ -66,22 +86,20 @@ function resetGrid(){
 //     verify[i].addEventListener('click',resultValidation);
 // }
 
-let count = 1
-verify2.addEventListener('click',(e)=>{
-    
-    
-    if(count === 1 && e.target.innerHTML===''){
-        e.target.innerHTML='X'
-        count = 0
-    }else if(count === 0 && e.target.innerHTML===''){
-        e.target.innerHTML="O"
-        count = 1
+let boxnum = 0;
+function clicekdCell (){
+    if (boxnum % 2 == 0 && this.textContent == '') {
+        this.textContent = 'X';
+        // statusDisplay.innerHTML = 'Player X turn'
     }
-})
+    if (boxnum % 2 == 1 && this.textContent == '') {
+        this.textContent = 'O';
+        // statusDisplay.innerHTML = 'Player X turn'
+    }
+    boxnum++
+};
 
-clear.addEventListener('click',(e)=>{
-    verify.forEach(item=> item.innerHTML="")
-})
+
 
 // status display needs to be added
 // reset button is broken.-
